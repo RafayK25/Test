@@ -1,0 +1,40 @@
+flowchart TD
+    classDef green fill:#C6EFCE,stroke:#006100,color:#006100,stroke-width:2px
+    classDef yellow fill:#FFEB9C,stroke:#9C6500,color:#9C6500,stroke-width:2px
+    classDef orange fill:#FCE4D6,stroke:#833C00,color:#833C00,stroke-width:2px
+    classDef ext fill:#EDEDED,stroke:#595959,color:#595959,stroke-width:2px
+    classDef phase fill:#2E4057,stroke:#2E4057,color:#FFFFFF,stroke-width:2px
+    classDef gate fill:#3B5998,stroke:#3B5998,color:#FFFFFF,stroke-width:2px
+    classDef block fill:#FFC7CE,stroke:#9C0006,color:#9C0006,stroke-width:2px
+
+    TITLE["P1: Approval and Scoping — Steps 1-8"]:::phase
+    style TITLE fill:#1F3864,stroke:#1F3864,color:#FFFFFF
+
+    S1["Step 1: Coverage Request and Universe Selection"]:::phase
+    N1a["1: Analyst submits coverage request to Research Director"]:::orange
+    N1b["1: Coverage universe drafted from sector watchlist"]:::green
+
+    S2["Step 2: IB Conflict and Restricted List Screen"]:::phase
+    N2a["2: Active mandate and restricted list check by Compliance"]:::orange
+    N2b["2: Quiet period and gray-list verification"]:::orange
+    G1{{"GATE 1: Conflict Decision by Compliance"}}:::gate
+    BLOCK(["BLOCKED — Coverage cannot proceed"]):::block
+
+    S3["Step 3: Research Director Approval"]:::phase
+    N3a["3: Director approves sector, company, and analyst assignment"]:::orange
+    N3b["3: Resource allocation and timeline set"]:::yellow
+
+    S4["Step 4: Compliance Onboarding"]:::phase
+    N4a["4: Analyst and associate register coverage with Compliance"]:::ext
+    N4b["4: Personal account trading restrictions applied — FINRA 2241"]:::orange
+    N4c["4: Conflict disclosure checklist completed and filed"]:::green
+
+    TITLE --> S1
+    S1 --> N1a & N1b
+    N1a & N1b --> S2
+    S2 --> N2a --> N2b --> G1
+    G1 -->|No conflict| S3
+    G1 -->|Conflict found| BLOCK
+    S3 --> N3a & N3b
+    N3a & N3b --> S4
+    S4 --> N4a & N4b & N4c
