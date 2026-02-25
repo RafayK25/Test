@@ -1,39 +1,54 @@
 flowchart TD
-    classDef green fill:#C6EFCE,stroke:#006100,color:#006100,stroke-width:2px
-    classDef yellow fill:#FFEB9C,stroke:#9C6500,color:#9C6500,stroke-width:2px
-    classDef red fill:#FFC7CE,stroke:#9C0006,color:#9C0006,stroke-width:2px
-    classDef phase fill:#2E4057,stroke:#2E4057,color:#FFFFFF,stroke-width:2px
-    classDef gate fill:#3B5998,stroke:#3B5998,color:#FFFFFF,stroke-width:2px
+    A([🏢 Triggering Event Occurs]) --> B
 
-    Ch1["Ch 1: Foundation Setup<br/>4G | 2Y | 0R"]:::green
-    Ch2["Ch 2: Face Financial Statements<br/>8G | 2Y | 0R"]:::green
-    Ch3["Ch 3: Note 1 — Accounting Policies<br/>5G | 12Y | 0R"]:::yellow
-    Ch4["Ch 4: Quantitative Footnotes — Notes 2–12<br/>1G | 19Y | 0R"]:::yellow
-    Ch5["Ch 5: MD&A — Results of Operations<br/>1G | 12Y | 0R"]:::yellow
-    Ch6["Ch 6: MD&A — Liquidity and Market Risk<br/>2G | 14Y | 0R"]:::yellow
-    Ch7["Ch 7: Part I — Business, Properties, Risk Factors<br/>4G | 9Y | 0R"]:::yellow
-    Ch8["Ch 8: Part II — Market Info and Controls<br/>5G | 4Y | 0R"]:::green
-    Ch9["Ch 9: Auditor's Report<br/>1G | 6Y | 0R"]:::yellow
-    Ch10["Ch 10: Part III — Corporate Governance<br/>4G | 8Y | 0R"]:::yellow
-    Ch11["Ch 11: Part IV — Exhibits and Certifications<br/>3G | 2Y | 0R"]:::green
-    Ch12["Ch 12: Final Assembly and Quality Verification<br/>3G | 9Y | 4R"]:::yellow
+    B[Identify Reportable Event\nunder SEC Rules] 
+    B --> C{Event Type?}
 
-    G1{{"GATE 1: Foundation Sign-Off"}}:::gate
-    G4{{"GATE 4: Final QC"}}:::gate
+    C -->|M&A, Bankruptcy,\nAmendments, etc.| D[Classify Correct\n8-K Item Number]
+    C -->|Earnings Results| D
+    C -->|Leadership Change| D
 
-    Ch1 --> G1
-    G1 --> Ch2
-    Ch2 --> Ch3
-    Ch2 --> Ch4
-    Ch3 --> Ch5
-    Ch3 --> Ch6
-    Ch4 --> Ch7
-    Ch4 --> Ch8
-    Ch5 --> Ch9
-    Ch6 --> Ch9
-    Ch7 --> Ch10
-    Ch8 --> Ch11
-    Ch9 --> Ch12
-    Ch10 --> Ch12
-    Ch11 --> Ch12
-    Ch12 --> G4
+    D --> E[Gather Supporting\nDocuments & Exhibits]
+    E --> F[Draft 8-K Body\nNarrative]
+    F --> G[Prepare Exhibits\neg. Press Release, Agreements]
+
+    G --> H[Legal & Compliance\nReview]
+    H --> I{Revisions\nNeeded?}
+    I -->|Yes| F
+    I -->|No| J[Executive Sign-Off\nChief Executive / CFO]
+
+    J --> K[EDGAR Filing\nSystem Submission]
+    K --> L[SEC Receipt &\nTimestamp Confirmed]
+    L --> M[Investor Relations\nNotification]
+    M --> N([✅ Filing Complete])
+
+    %% Styling nodes
+    style A fill:#1a1a2e,stroke:#e94560,color:#fff
+    style N fill:#1a1a2e,stroke:#0f9b58,color:#fff
+
+    %% LLM Ready - Green
+    style B fill:#0f4c35,stroke:#0f9b58,color:#a8f0c6
+    style D fill:#0f4c35,stroke:#0f9b58,color:#a8f0c6
+    style F fill:#0f4c35,stroke:#0f9b58,color:#a8f0c6
+    style K fill:#0f4c35,stroke:#0f9b58,color:#a8f0c6
+    style L fill:#0f4c35,stroke:#0f9b58,color:#a8f0c6
+
+    %% LLM + Human - Blue/Purple
+    style C fill:#1a1a4e,stroke:#4f8ef7,color:#a8c8ff
+    style E fill:#1a1a4e,stroke:#4f8ef7,color:#a8c8ff
+    style G fill:#1a1a4e,stroke:#4f8ef7,color:#a8c8ff
+    style I fill:#1a1a4e,stroke:#4f8ef7,color:#a8c8ff
+    style M fill:#1a1a4e,stroke:#4f8ef7,color:#a8c8ff
+
+    %% Human Only - Red/Orange
+    style H fill:#4e1a1a,stroke:#e94560,color:#ffb3b3
+    style J fill:#4e1a1a,stroke:#e94560,color:#ffb3b3
+
+    %% Legend
+    LG1[🟢 LLM Ready]
+    LG2[🔵 LLM + Human]
+    LG3[🔴 Human Only]
+
+    style LG1 fill:#0f4c35,stroke:#0f9b58,color:#a8f0c6
+    style LG2 fill:#1a1a4e,stroke:#4f8ef7,color:#a8c8ff
+    style LG3 fill:#4e1a1a,stroke:#e94560,color:#ffb3b3
